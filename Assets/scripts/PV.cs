@@ -10,7 +10,7 @@ public class PV : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         value = 100;
-        AddPV(50);
+        linkedText.text = value.ToString();
 	}
 
     public void AddPV(uint pvToAdd)

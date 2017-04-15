@@ -5,18 +5,20 @@ using UnityEngine.UI;
 
 public class Actions : MonoBehaviour {
 
-    public uint value;
+    public int potion;
+    // public int damage;
 
     public GameObject hero;
+    public GameObject ennemy;
 
     public void AddPV()
     {
-        hero.GetComponent<PV>().AddPV(value);
+        hero.GetComponent<PV>().AddPV(potion);
     }
 
     public void SubPV()
     {
-        hero.GetComponent<PV>().RemovePV(value);
+        ennemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
     }
 
     /*

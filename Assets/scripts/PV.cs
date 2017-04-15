@@ -9,7 +9,7 @@ public class PV : MonoBehaviour {
     public Text linkedText;
 	// Use this for initialization
 	void Start () {
-        value = 100;
+        // value = 100;
         linkedText.text = value.ToString();
 	}
 

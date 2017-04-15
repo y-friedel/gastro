@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class Actions : MonoBehaviour {
 
-    public int value;
     public int damageValue;
+    public int potion;
 
     public GameObject hero;
+    public GameObject ennemy;
 
     private bool damageMode;
 
     public void AddPV()
     {
-        hero.GetComponent<PV>().AddPV(value);
+        hero.GetComponent<PV>().AddPV(potion);
     }
 
     public void EnableDamage()
@@ -25,6 +26,7 @@ public class Actions : MonoBehaviour {
     public void DisableDamage()
     {
         damageMode = false;
+        ennemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
     }
 
     /*

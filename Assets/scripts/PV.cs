@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PV : MonoBehaviour {
 
-    public uint value;
+    public int value;
     public Text linkedText;
 	// Use this for initialization
 	void Start () {
@@ -13,13 +13,13 @@ public class PV : MonoBehaviour {
         linkedText.text = value.ToString();
 	}
 
-    public void AddPV(uint pvToAdd)
+    public void AddPV(int pvToAdd)
     {
         value += pvToAdd;
         linkedText.text = value.ToString();
     }
 
-    public void RemovePV(uint pvToRemove)
+    public void RemovePV(int pvToRemove)
     {
         value -= pvToRemove;
         linkedText.text = value.ToString();

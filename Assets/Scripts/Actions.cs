@@ -8,14 +8,13 @@ public class Actions : MonoBehaviour {
     public int damageValue;
     public int potion;
 
-    public int nbEnemies;
+    public int nbKilledEnemies;
 
     public GameObject hero;
     public GameObject enemy;
     
 
     private bool damageMode;
-    private bool enemyDeath;
 
     public void AddPV()
     {
@@ -32,21 +31,10 @@ public class Actions : MonoBehaviour {
         damageMode = false;
     }
 
-    public void SetEnemyDeath(bool isEnemyDeath)
-    {
-        enemyDeath = isEnemyDeath;
-    }
-
-    public bool GetEnemyDeath()
-    {
-        return enemyDeath;
-    }
-
     // Use this for initialization
     void Start () {
         damageMode = false;
-        enemyDeath = false;
-        nbEnemies = 0;
+        nbKilledEnemies = 0;
 	}
 	
 	// Update is called once per frame
@@ -55,18 +43,14 @@ public class Actions : MonoBehaviour {
         {
             enemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
 
-            if (enemy.GetComponent<PV>().value <= 0)
-            {
-                enemyDeath = true;
-            }
-
-            if(enemyDeath == true)
+            if(enemy.GetComponent<PV>().value <= 0)
             {
                 GetComponent<EnemyFactory>().GenerateEnemy();
-                nbEnemies++;
-                enemyDeath = false;
+                nbKilledEnemies++;
             }
         }
-	}
+
+        hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().damage / 100f);
+    }
     
 }

@@ -6,20 +6,25 @@ public class EnemyFactory : MonoBehaviour {
 
     public GameObject enemySlot;
 
-	// Use this for initialization
-	void Start () {
-		//Generate the firstEnnemy
-	}
+    public float initialTime;
+    public float initialLife;
+
+    public int nbTotalEnemies;
+
+    // Use this for initialization
+    void Start () {
+        initialTime = Time.time;
+        nbTotalEnemies = 0;
+    }
 	
     public void GenerateEnemy()
     {
-        int newPV;
-        if(Random.value > 0.5)
-            newPV = 200;
-        else
-            newPV = 100;
+        nbTotalEnemies++;
+        float currentTime = Time.time - initialTime;
+        int lifeRatio = Random.Range(50, 100);
 
-        enemySlot.GetComponent<PV>().SetPV(newPV);
+        enemySlot.GetComponent<PV>().SetPV(Mathf.CeilToInt(initialLife * lifeRatio / 100));
+        enemySlot.GetComponent<Weapons>().ShuffleWeapon(100-lifeRatio, currentTime);
     }
 
 

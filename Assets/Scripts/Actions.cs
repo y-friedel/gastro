@@ -8,6 +8,8 @@ public class Actions : MonoBehaviour {
     public int damageValue;
     public int potion;
 
+    public int nbEnemies;
+
     public GameObject hero;
     public GameObject enemy;
     
@@ -44,6 +46,7 @@ public class Actions : MonoBehaviour {
     void Start () {
         damageMode = false;
         enemyDeath = false;
+        nbEnemies = 0;
 	}
 	
 	// Update is called once per frame
@@ -55,6 +58,13 @@ public class Actions : MonoBehaviour {
             if (enemy.GetComponent<PV>().value <= 0)
             {
                 enemyDeath = true;
+            }
+
+            if(enemyDeath == true)
+            {
+                GetComponent<EnemyFactory>().GenerateEnemy();
+                nbEnemies++;
+                enemyDeath = false;
             }
         }
 	}

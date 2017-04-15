@@ -16,7 +16,7 @@ public class PV : MonoBehaviour {
 
     public void SetPV(int pv)
     {
-        value += pv;
+        value = pv;
         linkedText.text = value.ToString();
     }
 

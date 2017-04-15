@@ -5,31 +5,35 @@ using UnityEngine.UI;
 
 public class PV : MonoBehaviour {
 
-    public int value;
+    public float value;
     public Text linkedText;
 
 	// Use this for initialization
 	void Start () {
-        // value = 100;
-        linkedText.text = value.ToString();
-	}
+        ShowPVText();
+    }
 
-    public void SetPV(int pv)
+    public void SetPV(float pv)
     {
         value = pv;
-        linkedText.text = value.ToString();
+        ShowPVText();
     }
 
-    public void AddPV(int pvToAdd)
+    public void AddPV(float pvToAdd)
     {
         value += pvToAdd;
-        linkedText.text = value.ToString();
+        ShowPVText();
     }
 
-    public void RemovePV(int pvToRemove)
+    public void RemovePV(float pvToRemove)
     {
         value -= pvToRemove;
-        linkedText.text = value.ToString();
+        ShowPVText();
+    }
+
+    public void ShowPVText()
+    {
+        linkedText.text = Mathf.CeilToInt(value).ToString();
     }
 
     // Update is called once per frame

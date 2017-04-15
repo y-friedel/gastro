@@ -7,8 +7,8 @@ public class Actions : MonoBehaviour {
 
     public int damageValue;
     public int potion;
-
-    public int nbEnemies;
+    
+    public int nbKilledEnemies;
     public Text nbEnemiesText;
 
     public GameObject hero;
@@ -16,7 +16,6 @@ public class Actions : MonoBehaviour {
     
 
     private bool damageMode;
-    private bool enemyDeath;
 
     public void AddPV()
     {
@@ -33,15 +32,6 @@ public class Actions : MonoBehaviour {
         damageMode = false;
     }
 
-    public void SetEnemyDeath(bool isEnemyDeath)
-    {
-        enemyDeath = isEnemyDeath;
-    }
-
-    public bool GetEnemyDeath()
-    {
-        return enemyDeath;
-    }
 
     public void ChangeEnemy()
     {
@@ -51,9 +41,8 @@ public class Actions : MonoBehaviour {
     // Use this for initialization
     void Start () {
         damageMode = false;
-        enemyDeath = false;
-        nbEnemies = 0;
-        nbEnemiesText.text = "Kills : " + nbEnemies.ToString();
+        nbKilledEnemies = 0;
+        nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
     }
 	
 	// Update is called once per frame
@@ -62,19 +51,15 @@ public class Actions : MonoBehaviour {
         {
             enemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
 
-            if (enemy.GetComponent<PV>().value <= 0)
-            {
-                enemyDeath = true;
-            }
-
-            if(enemyDeath == true)
+            if(enemy.GetComponent<PV>().value <= 0)
             {
                 GetComponent<EnemyFactory>().GenerateEnemy();
-                nbEnemies++;
-                nbEnemiesText.text = "Kills : " + nbEnemies.ToString();
-                enemyDeath = false;
+                nbKilledEnemies++;
+                nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
             }
         }
-	}
+
+        hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().damage / 100f);
+    }
     
 }

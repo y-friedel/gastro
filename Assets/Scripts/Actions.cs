@@ -26,30 +26,7 @@ public class Actions : MonoBehaviour {
     public void DisableDamage()
     {
         damageMode = false;
-        ennemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
     }
-
-    /*
-    // Use this for initialization
-    void Start()
-    {
-        addPVText.text = "Add";
-        subPVText.text = "Sub";
-    }
-    */
-
-    /*
-    public void SetAdd()
-    {
-        addPVText.text = "Add";
-    }
-
-    public void SetSub()
-    {
-        subPVText.text = "Add";
-    }
-    */
-
 
     // Use this for initialization
     void Start () {
@@ -60,7 +37,7 @@ public class Actions : MonoBehaviour {
 	void Update () {
 		if(damageMode)
         {
-            hero.GetComponent<PV>().RemovePV(damageValue);
+            ennemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
         }
 	}
     

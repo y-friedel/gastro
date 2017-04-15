@@ -9,9 +9,11 @@ public class Actions : MonoBehaviour {
     public int potion;
 
     public GameObject hero;
-    public GameObject ennemy;
+    public GameObject enemy;
+    
 
     private bool damageMode;
+    private bool enemyDeath;
 
     public void AddPV()
     {
@@ -28,16 +30,32 @@ public class Actions : MonoBehaviour {
         damageMode = false;
     }
 
+    public void SetEnemyDeath(bool isEnemyDeath)
+    {
+        enemyDeath = isEnemyDeath;
+    }
+
+    public bool GetEnemyDeath()
+    {
+        return enemyDeath;
+    }
+
     // Use this for initialization
     void Start () {
         damageMode = false;
+        enemyDeath = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(damageMode)
         {
-            ennemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
+            enemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
+
+            if (enemy.GetComponent<PV>().value <= 0)
+            {
+                enemyDeath = true;
+            }
         }
 	}
     

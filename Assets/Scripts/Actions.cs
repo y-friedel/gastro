@@ -9,6 +9,7 @@ public class Actions : MonoBehaviour {
     public int potion;
 
     public int nbEnemies;
+    public Text nbEnemiesText;
 
     public GameObject hero;
     public GameObject enemy;
@@ -42,12 +43,18 @@ public class Actions : MonoBehaviour {
         return enemyDeath;
     }
 
+    public void ChangeEnemy()
+    {
+        GetComponent<EnemyFactory>().GenerateEnemy();
+    }
+
     // Use this for initialization
     void Start () {
         damageMode = false;
         enemyDeath = false;
         nbEnemies = 0;
-	}
+        nbEnemiesText.text = "Kills : " + nbEnemies.ToString();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -64,6 +71,7 @@ public class Actions : MonoBehaviour {
             {
                 GetComponent<EnemyFactory>().GenerateEnemy();
                 nbEnemies++;
+                nbEnemiesText.text = "Kills : " + nbEnemies.ToString();
                 enemyDeath = false;
             }
         }

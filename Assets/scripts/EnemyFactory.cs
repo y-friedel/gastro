@@ -30,8 +30,6 @@ public class EnemyFactory : MonoBehaviour {
     void Start () {
         initialTime = Time.time;
         nbTotalEnemies = 0;
-
-        GenerateEnemy();
     }
 
     public void GenerateEnemy()
@@ -62,7 +60,7 @@ public class EnemyFactory : MonoBehaviour {
         ElementalStats ennemyElementalStats = enemySlot.GetComponent<ElementalStats>();
         ElementalStats.Element elementType = (ElementalStats.Element)Random.Range(1, 5);
         ennemyElementalStats.ResetStats();
-        ennemyElementalStats.standardStats = Mathf.CeilToInt(subStandardPower);
+        ennemyElementalStats.standardPower = Mathf.CeilToInt(subStandardPower);
         ennemyElementalStats.stats[elementType] = Mathf.CeilToInt(subElementalPower);
 
         // Set damages

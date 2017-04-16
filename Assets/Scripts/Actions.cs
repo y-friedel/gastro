@@ -43,23 +43,43 @@ public class Actions : MonoBehaviour {
         nbKilledEnemies = 0;
         nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
     }
+
+    void ResolveAttack(GameObject attacker, GameObject defender)
+    {
+        int standardDamages = attacker.GetComponent<Weapons>().damage;
+        int elementalDamages = attacker.GetComponent<Weapons>().elementalDamage;
+
+        int standardDefense = defender.GetComponent<ElementalStats>().standardPower;
+        int elementalDefense = defender.GetComponent<ElementalStats>().stats[attacker.GetComponent<ElementalStats>().selectedElement];
+
+        if (standardDefense >= standardDamages)
+            standardDamages = 0;
+
+        if (elementalDefense >= elementalDamages)
+            elementalDamages = 0;
+
+        defender.GetComponent<PV>().RemovePV(standardDamages / 100f);
+        defender.GetComponent<PV>().RemovePV(elementalDamages / 100f);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		if(damageMode)
         {
-            enemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
-            
-            if (enemy.GetComponent<PV>().value <= 0)
-            {
-                GetComponent<EnemyFactory>().GenerateEnemy();
-                nbKilledEnemies++;
-                nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
-            }
+            ResolveAttack(hero, enemy);
+
+            //enemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
         }
 
-        hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().damage / 100f);
-        hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().elementalDamage / 100f);
+        if (enemy.GetComponent<PV>().value <= 0)
+        {
+            GetComponent<EnemyFactory>().GenerateEnemy();
+            nbKilledEnemies++;
+            nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
+        }
+
+        ResolveAttack(enemy, hero);
     }
     
 }

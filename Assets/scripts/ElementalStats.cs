@@ -6,7 +6,8 @@ public class ElementalStats : MonoBehaviour {
 
     public enum Element { Fire = 1, Wind = 2, Ice = 3, Ground = 4 };
 
-    public int standardStats;
+    public int standardPower;
+    public Element selectedElement;
     public Dictionary<Element, int> stats;
 
     public void SetElementPower(Element elem, int power)
@@ -16,7 +17,7 @@ public class ElementalStats : MonoBehaviour {
 
     public void ResetStats()
     {
-        standardStats = 0;
+        standardPower = 0;
         stats[Element.Fire] = 0;
         stats[Element.Wind] = 0;
         stats[Element.Ice] = 0;

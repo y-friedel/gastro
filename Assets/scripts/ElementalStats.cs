@@ -6,9 +6,14 @@ public class ElementalStats : MonoBehaviour {
 
     public enum Element { Fire = 1, Wind = 2, Ice = 3, Ground = 4 };
 
+
+    [Header("General Settings")]
+    public int initialPower;
     public int standardPower;
     public Element selectedElement;
-    public Dictionary<Element, int> stats;
+    public Dictionary<Element, int> stats = new Dictionary<Element, int>();
+
+    public float upgradeRatio;
 
     public void SetElementPower(Element elem, int power)
     {
@@ -26,19 +31,10 @@ public class ElementalStats : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        stats = new Dictionary<Element, int>();
         stats.Add(Element.Fire, 0);
         stats.Add(Element.Wind, 0);
         stats.Add(Element.Ice, 0);
         stats.Add(Element.Ground, 0);
-    }
-	
-
-    public void Shuffle(float currentTime)
-    {
-        int newRatio = Random.Range(5, 50);
-        Element elementType = (ElementalStats.Element)Random.Range(1, 5);
-
     }
 
     // Update is called once per frame

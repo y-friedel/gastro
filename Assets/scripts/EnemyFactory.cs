@@ -29,12 +29,15 @@ public class EnemyFactory : MonoBehaviour {
     public void Restart()
     {
         initialTime = Time.time;
+        GenerateEnemy();
         nbTotalEnemies = 0;
     }
 
     // Use this for initialization
-    void Start () {
-        Restart();
+    void Start ()
+    {
+        initialTime = Time.time;
+        nbTotalEnemies = 0;
     }
 
     public void GenerateEnemy()
@@ -46,12 +49,12 @@ public class EnemyFactory : MonoBehaviour {
         int damageRatio = 100 - lifeRatio;
         int elementalSubRatio = Random.Range(1, 30);
 
-        float lifePower = (initialLife + initialLife * lifeRatio / 100f) // Random Modifier 
+        float lifePower = initialLife + (initialLife * lifeRatio / 100f) // Random Modifier 
                                 * (currentTime / timeStepDuration) * lifeEvolutionRate // Time Modifier
                                 * lifeUpdate; // Magic Modifier
 
 
-        float statsPower = (initialPower + initialPower * damageRatio / 100f)
+        float statsPower = initialPower + (initialPower * damageRatio / 100f)
                                 * (currentTime / timeStepDuration) * powerEvolutionRate // Time Modifier
                                 * powerUpdate; // Magic Modifier
 

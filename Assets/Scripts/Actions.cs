@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Actions : MonoBehaviour {
-
-    public int damageValue;
+    
     public int potion;
     
     public int nbKilledEnemies;
@@ -19,7 +18,11 @@ public class Actions : MonoBehaviour {
 
     public void AddPV()
     {
-        hero.GetComponent<PV>().AddPV(potion);
+        if (hero.GetComponent<Inventory>().GetPotion() != 0)
+        {
+            hero.GetComponent<PV>().AddPV(potion);
+            hero.GetComponent<Inventory>().UsePotion();
+        }
     }
 
     public void EnableDamage()
@@ -51,12 +54,13 @@ public class Actions : MonoBehaviour {
     {
         damageMode = false;
         isGameOver = false;
-        nbKilledEnemies = 0;
-        nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
         hero.GetComponent<PV>().SetPV(hero.GetComponent<PV>().initialHP);
         GetComponent<EnemyFactory>().Restart();
         GetComponent<CanvasActions>().SetPauseOff();
         GetComponent<CanvasActions>().HidePopUpLose();
+        hero.GetComponent<Inventory>().Restart();
+        nbKilledEnemies = 0;
+        nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
     }
 
     // Use this for initialization

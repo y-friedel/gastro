@@ -59,6 +59,7 @@ public class Actions : MonoBehaviour {
         }
 
         hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().damage / 100f);
+        hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().elementalDamage / 100f);
     }
     
 }

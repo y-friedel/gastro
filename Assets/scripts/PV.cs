@@ -8,8 +8,10 @@ public class PV : MonoBehaviour {
     public float value;
     public Text linkedText;
 
-	// Use this for initialization
-	void Start () {
+    // public Texture2D healthBar;
+
+    // Use this for initialization
+    void Start () {
         ShowPVText();
     }
 
@@ -41,4 +43,10 @@ public class PV : MonoBehaviour {
     {
 
 	}
+    /*
+    void OnGUI()
+    {
+        GUI.DrawTexture(new Rect(10, 20, healthBar.width * value / 100, healthBar.height), healthBar);
+    }
+    */
 }

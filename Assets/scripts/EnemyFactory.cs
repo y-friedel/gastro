@@ -13,7 +13,6 @@ public class EnemyFactory : MonoBehaviour {
     public float timeStepDuration; // Duration of a step in seconds
 
     [Header("Enemy Weapon Settings")]
-    public float damageEvolutionRate; // Power evolution between two steps
     public float damageUpdate;
 
     [Header("Enemy Life Settings")]
@@ -50,7 +49,7 @@ public class EnemyFactory : MonoBehaviour {
 
 
         float statsPower = (initialPower + initialPower * damageRatio / 100f)
-                                * (currentTime / timeStepDuration) * damageEvolutionRate // Time Modifier
+                                * (currentTime / timeStepDuration) * powerEvolutionRate // Time Modifier
                                 * powerUpdate; // Magic Modifier
 
         float subElementalPower = statsPower * elementalSubRatio / 100f;

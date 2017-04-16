@@ -15,6 +15,8 @@ public class EnemyFactory : MonoBehaviour {
     void Start () {
         initialTime = Time.time;
         nbTotalEnemies = 0;
+
+        GenerateEnemy();
     }
 	
     public void GenerateEnemy()

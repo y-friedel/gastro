@@ -12,7 +12,7 @@ public class Weapons : MonoBehaviour {
     public float evolutionRate; // Power evolution between two steps
     public float timeStepDuration; // Duration of a step in seconds
 
-    public enum Element {Fire, Wind, Ice, Ground};
+    public enum Element {Fire = 1, Wind = 2, Ice = 3, Ground = 4};
 
     [Header("Current Weapon")]
     public int damage;
@@ -27,6 +27,8 @@ public class Weapons : MonoBehaviour {
         int elementalPart = Random.Range(1, 20);
         damage = (100 - elementalPart) * tempDamage / 100;
         elementalDamage = tempDamage - damage;
+
+        elementType = (Element)Random.Range(1, 5);
     }
 
 

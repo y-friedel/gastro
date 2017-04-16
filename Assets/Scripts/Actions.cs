@@ -13,7 +13,6 @@ public class Actions : MonoBehaviour {
 
     public GameObject hero;
     public GameObject enemy;
-    
 
     private bool damageMode;
 

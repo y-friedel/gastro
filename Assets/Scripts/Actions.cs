@@ -49,8 +49,8 @@ public class Actions : MonoBehaviour {
 		if(damageMode)
         {
             enemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
-
-            if(enemy.GetComponent<PV>().value <= 0)
+            
+            if (enemy.GetComponent<PV>().value <= 0)
             {
                 GetComponent<EnemyFactory>().GenerateEnemy();
                 nbKilledEnemies++;

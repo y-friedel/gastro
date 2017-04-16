@@ -15,6 +15,7 @@ public class Actions : MonoBehaviour {
     public GameObject enemy;
 
     private bool damageMode;
+    private bool isGameOver;
 
     public void AddPV()
     {
@@ -31,35 +32,67 @@ public class Actions : MonoBehaviour {
         damageMode = false;
     }
 
+    public void EnableGameOver()
+    {
+        isGameOver = true;
+    }
+
+    public void DisableGameOver()
+    {
+        isGameOver = false;
+    }
 
     public void ChangeEnemy()
     {
         GetComponent<EnemyFactory>().GenerateEnemy();
     }
 
-    // Use this for initialization
-    void Start () {
+    public void Restart()
+    {
         damageMode = false;
+        isGameOver = false;
+        nbKilledEnemies = 0;
+        nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
+        hero.GetComponent<PV>().SetPV(hero.GetComponent<PV>().initialHP);
+        GetComponent<EnemyFactory>().Restart();
+        GetComponent<CanvasActions>().SetPauseOff();
+        GetComponent<CanvasActions>().HidePopUpLose();
+    }
+
+    // Use this for initialization
+    void Start ()
+    {
+        damageMode = false;
+        isGameOver = false;
         nbKilledEnemies = 0;
         nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if(damageMode)
+        if (!isGameOver)
         {
-            enemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
-            
-            if (enemy.GetComponent<PV>().value <= 0)
+            if (damageMode)
             {
-                GetComponent<EnemyFactory>().GenerateEnemy();
-                nbKilledEnemies++;
-                nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
+                enemy.GetComponent<PV>().RemovePV(hero.GetComponent<Weapons>().damage);
+
+                if (enemy.GetComponent<PV>().value <= 0)
+                {
+                    GetComponent<EnemyFactory>().GenerateEnemy();
+                    nbKilledEnemies++;
+                    nbEnemiesText.text = "Kills : " + nbKilledEnemies.ToString();
+                }
+            }
+
+            hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().damage / 100f);
+            hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().elementalDamage / 100f);
+
+            if (hero.GetComponent<PV>().value <= 0)
+            {
+                isGameOver = true;
+                GetComponent<CanvasActions>().DisplayPopUpLose();                
             }
         }
-
-        hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().damage / 100f);
-        hero.GetComponent<PV>().RemovePV(enemy.GetComponent<Weapons>().elementalDamage / 100f);
     }
     
 }

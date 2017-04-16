@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PV : MonoBehaviour {
 
+    public float initialHP;
     public float value;
     public Text linkedText;
 

@@ -11,6 +11,7 @@ public class CanvasActions : MonoBehaviour {
     public GameObject CanvasGame;
 
     public GameObject PopUpQuit;
+    public GameObject PopUpLose;
 
 
     public void SetHomeFalse()
@@ -32,14 +33,25 @@ public class CanvasActions : MonoBehaviour {
         CanvasGame.SetActive(true);
     }
 
-    public void DisplayPopUp ()
+    public void DisplayPopUpQuit()
     {
         PopUpQuit.SetActive(true);
     }
 
-    public void HidePopUp()
+    public void HidePopUpQuit()
     {
         PopUpQuit.SetActive(false);
+    }
+
+    public void DisplayPopUpLose()
+    {
+        PopUpLose.SetActive(true);
+    }
+
+    public void HidePopUpLose()
+    {
+        PopUpLose.SetActive(false);
+        DisplayPopUpQuit();
     }
 
     public void Quit()

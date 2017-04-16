@@ -26,12 +26,17 @@ public class EnemyFactory : MonoBehaviour {
     public float powerUpdate;
 
 
-    // Use this for initialization
-    void Start () {
+    public void Restart()
+    {
         initialTime = Time.time;
         nbTotalEnemies = 0;
 
         GenerateEnemy();
+    }
+
+    // Use this for initialization
+    void Start () {
+        Restart();
     }
 
     public void GenerateEnemy()
